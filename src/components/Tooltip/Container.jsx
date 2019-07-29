@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import CloseBtn from './CloseBtn';
+import CloseBtn from './CloseBtn.jsx';
 
 export default class JoyrideTooltipContainer extends React.Component {
   static propTypes = {

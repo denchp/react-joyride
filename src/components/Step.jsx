@@ -12,16 +12,17 @@ import { componentTypeWithRefs } from '../modules/propTypes';
 import Scope from '../modules/scope';
 import { validateStep } from '../modules/step';
 
-import Beacon from './Beacon';
-import Overlay from './Overlay';
-import Tooltip from './Tooltip/index';
-import Portal from './Portal';
+import Beacon from './Beacon.jsx';
+import Overlay from './Overlay.jsx';
+import Tooltip from './Tooltip/JoyrideTooltip.jsx';
+import Portal from './Portal.jsx';
 
 export default class JoyrideStep extends React.Component {
   scope = { removeScope: () => {} };
 
   static propTypes = {
     action: PropTypes.string.isRequired,
+    advanceOnSpotlightClick: PropTypes.bool,
     callback: PropTypes.func.isRequired,
     continuous: PropTypes.bool.isRequired,
     controlled: PropTypes.bool.isRequired,

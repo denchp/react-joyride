@@ -15,7 +15,7 @@ import { getBrowser, isLegacy, log } from '../modules/helpers';
 
 import LIFECYCLE from '../constants/lifecycle';
 
-import Spotlight from './Spotlight';
+import Spotlight from './Spotlight.jsx';
 
 export default class JoyrideOverlay extends React.Component {
   _isMounted = false;
@@ -117,7 +117,6 @@ export default class JoyrideOverlay extends React.Component {
       height: Math.round(elementRect.height + spotlightPadding * 2),
       left: Math.round(elementRect.left - spotlightPadding),
       opacity: showSpotlight ? 1 : 0,
-      pointerEvents: spotlightClicks ? 'none' : 'auto',
       position: isFixedTarget ? 'fixed' : 'absolute',
       top,
       transition: 'opacity 0.2s',
@@ -183,8 +182,9 @@ export default class JoyrideOverlay extends React.Component {
 
   render() {
     const { mouseOverSpotlight, showSpotlight } = this.state;
-    const { disableOverlay, lifecycle, onClickOverlay, placement, styles } = this.props;
-
+    const { disableOverlay, lifecycle, onClickOverlay, placement, styles, target } = this.props;
+    const element = getElement(target);
+    
     if (disableOverlay || lifecycle !== LIFECYCLE.TOOLTIP) {
       return null;
     }
@@ -204,7 +204,7 @@ export default class JoyrideOverlay extends React.Component {
     };
 
     let spotlight = placement !== 'center' && showSpotlight && (
-      <Spotlight styles={this.spotlightStyles} />
+      <Spotlight styles={this.spotlightStyles} onClick={() => element.click() }/>
     );
 
     // Hack for Safari bug with mix-blend-mode with z-index
